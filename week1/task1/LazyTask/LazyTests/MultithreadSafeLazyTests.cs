@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading;
 using LazyTask;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,7 +66,7 @@ namespace LazyTests
         [TestMethod]
         public void CheckThatLazyWorksWithMultipleThreads()
         {
-            var threads = new Thread[3];
+            var threads = new Thread[30];
             int counter = 0;
 
             var lazy = LazyFactory.CreateMultithreadLazy(() => { counter++; return 42; });
@@ -79,16 +79,9 @@ namespace LazyTests
                 });
             }
 
-            foreach (var thread in threads)
-            {
-                thread.Start();
-            }
-
-            foreach (var thread in threads)
-            {
-                thread.Join();
-            }
-
+            threads.ToList().ForEach(x => x.Start());
+            threads.ToList().ForEach(x => x.Join());
+            
             Assert.AreEqual(1, counter);
         }
     }

@@ -4,9 +4,14 @@ namespace LazyTask
     /// <summary>
     /// Простой Lazy
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Тип вычисляемого значения</typeparam>
     public class SimpleLazy<T> : ILazy<T>
     {
+        private T lazyObject;
+        private Func<T> supplier;
+
+        private bool isInitialized;
+
         public T Get()
         {
             if (!isInitialized)
@@ -20,15 +25,14 @@ namespace LazyTask
             return lazyObject;
         }
 
+        /// <summary>
+        /// Создаёт SimpleLazy
+        /// </summary>
+        /// <param name="f"></param>
         public SimpleLazy(Func<T> f)
         {
             supplier = f;
             isInitialized = false;
         }
-
-        private T lazyObject;
-        private Func<T> supplier;
-
-        private bool isInitialized;
     }
 }
