@@ -3,11 +3,11 @@ image: Visual Studio 2017
 build: off
 
 environment:
-	matrix:
-	- SOLUTION_NAME: week1/task1/LazyTask/LazyTask.sln
+    matrix:
+    - SOLUTION_NAME: week1/task1/LazyTask/LazyTask.sln
 
 before_build:
-	- nuget restore %SOLUTION_NAME%
+    - nuget restore %SOLUTION_NAME%
 
 build_script:
-	- msbuild %SOLUTION_NAME%
+    - msbuild %SOLUTION_NAME%
