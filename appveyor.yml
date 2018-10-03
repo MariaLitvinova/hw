@@ -1,0 +1,16 @@
+image: Visual Studio 2017
+
+build: off
+
+environment:
+    matrix:
+    - SOLUTION_NAME1: week1/task1/LazyTask/LazyTask.sln
+    - SOLUTION_NAME2: week2/task1/ThreadPoolTask/ThreadPoolTask.sln
+
+before_build:
+    - nuget restore %SOLUTION_NAME1%
+    - nuget restore %SOLUTION_NAME2%
+
+build_script:
+    - msbuild %SOLUTION_NAME1%
+    - msbuild %SOLUTION_NAME2%
