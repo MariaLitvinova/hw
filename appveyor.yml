@@ -12,5 +12,5 @@ before_build:
 build_script:
     - msbuild %SOLUTION_NAME%
 
-tests:
+test:
     - dotnet test ~/week2/task1/ThreadPoolTask/ThreadPoolTests.csproj
