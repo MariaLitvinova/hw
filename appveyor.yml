@@ -12,5 +12,7 @@ before_build:
 build_script:
     - msbuild %SOLUTION_NAME%
 
-test:
-    - dotnet test ~/week2/task1/ThreadPoolTask/ThreadPoolTests.csproj
+test_script:
+    - cmd: dotnet restore ./week2/task1/ThreadPoolTask/ThreadPoolTests/ThreadPoolTests.csproj --verbosity m
+    - cmd: cd week2/task1/ThreadPoolTask/ThreadPoolTests
+    - cmd: dotnet test
