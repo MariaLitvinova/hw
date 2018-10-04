@@ -21,6 +21,20 @@ namespace ThreadPoolTests
             return result;
         }
 
+        private int F(int n)
+        {
+            var result = 0;
+            for (int i = 0; i < n * 100000000; ++i)
+            {
+                result += 1;
+            }
+            return result + n;
+        }
+
+        private int F1() => F(1);
+        private int F2() => F(2);
+        private int F3() => F(3);
+
         private int SuperShortFunction()
         {
             var result = 0;
@@ -48,13 +62,13 @@ namespace ThreadPoolTests
 
             var expectedResult = SuperLongFunction();
 
-            var task1 = threadPool.AddTask(SuperLongFunction);
-            var task2 = threadPool.AddTask(SuperLongFunction);
-            var task3 = threadPool.AddTask(SuperLongFunction);
+            var task1 = threadPool.AddTask(F1);
+            var task2 = threadPool.AddTask(F2);
+            var task3 = threadPool.AddTask(F3);
 
-            Assert.AreEqual(expectedResult, task1.Result);
-            Assert.AreEqual(expectedResult, task2.Result);
-            Assert.AreEqual(expectedResult, task3.Result);
+            Assert.AreEqual(F1(), task1.Result);
+            Assert.AreEqual(F2(), task2.Result);
+            Assert.AreEqual(F3(), task3.Result);
         }
 
         [TestMethod]

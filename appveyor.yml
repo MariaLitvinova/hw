@@ -4,7 +4,6 @@ build: off
 
 environment:
     matrix:
-    - SOLUTION_NAME: week1/task1/LazyTask/LazyTask.sln
     - SOLUTION_NAME: week2/task1/ThreadPoolTask/ThreadPoolTask.sln
 
 before_build:
@@ -12,3 +11,6 @@ before_build:
 
 build_script:
     - msbuild %SOLUTION_NAME%
+
+tests:
+    - dotnet test ~/week2/task1/ThreadPoolTask/ThreadPoolTests.csproj
